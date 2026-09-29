@@ -26,3 +26,4 @@ for file_path in files:
         print("ID:", document.id)
         print("Type:", document.metadata["file_type"])
         print("Characters:", len(document.text))
+        print("Hash:", document.content_hash)
