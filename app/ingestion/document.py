@@ -2,15 +2,6 @@ from pydantic import BaseModel, Field
 from typing import Any
 from datetime import datetime, timezone
 
-from pydantic import BaseModel, Field
-from typing import Any
-from datetime import datetime, timezone
-
-
-from pydantic import BaseModel, Field
-from typing import Any
-from datetime import datetime, timezone
-
 from app.ingestion.utils import generate_content_hash
 
 

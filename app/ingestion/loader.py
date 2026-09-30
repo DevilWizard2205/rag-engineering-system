@@ -4,7 +4,7 @@ from app.ingestion.loaders.txt_loader import TXTLoader
 from app.ingestion.loaders.pdf_loader import PDFLoader
 from app.ingestion.loaders.markdown_loader import MarkdownLoader
 from app.ingestion.loaders.html_loader import HTMLLoader
-
+from app.ingestion.metadata import normalize_metadata
 
 class DocumentLoader:
 
@@ -29,4 +29,14 @@ class DocumentLoader:
 
         loader = self.loaders[extension]
 
-        return loader.load(file_path)
+        documents = loader.load(file_path)
+
+        if not isinstance(documents, list):
+            documents = [documents]
+
+        documents = [
+            normalize_metadata(document)
+            for document in documents
+        ]
+
+        return documents
