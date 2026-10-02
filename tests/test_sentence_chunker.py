@@ -18,8 +18,7 @@ document = Document(
     },
 )
 
-
-chunker = SentenceChunker(
+chunker = SentenceChunker( 
     max_characters=120
 )
 

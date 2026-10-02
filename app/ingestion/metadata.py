@@ -25,6 +25,6 @@ def normalize_metadata(document: Document) -> Document:
 
     metadata["content_hash"] = document.content_hash
 
-    return document.copy(
+    return document.model_copy(
         update={"metadata": metadata}
     )
