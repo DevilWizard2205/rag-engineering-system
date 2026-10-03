@@ -29,14 +29,11 @@ class ChromaVectorStore:
                 "Number of chunks must match number of embeddings"
             )
 
-        self.collection.add(
+        self.collection.upsert(
             ids=[chunk.id for chunk in chunks],
             documents=[chunk.text for chunk in chunks],
             embeddings=embeddings,
-            metadatas=[
-                chunk.metadata
-                for chunk in chunks
-            ],
+            metadatas=[chunk.metadata for chunk in chunks],
         )
 
     def search(

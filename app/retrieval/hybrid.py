@@ -1,24 +1,33 @@
+from app.indexing.chunk_store import IndexedChunkStore
 from app.retrieval.bm25 import BM25Retriever
 from app.retrieval.rrf import ReciprocalRankFusion
 from app.retrieval.reranker import CrossEncoderReranker
 
 
 class HybridRetriever:
+
     def __init__(
         self,
-        chunks,
         vector_store,
         embedding_model,
+        chunks=None,
         rrf_k: int = 60,
         reranker_model: str = (
             "cross-encoder/ms-marco-MiniLM-L-6-v2"
         ),
     ):
-        self.chunks = chunks
         self.vector_store = vector_store
         self.embedding_model = embedding_model
 
-        self.bm25 = BM25Retriever(chunks)
+        # If chunks were supplied, use them.
+        # Otherwise recover them from persistent ChromaDB.
+        if chunks is None:
+            chunk_store = IndexedChunkStore(vector_store)
+            chunks = chunk_store.load_chunks()
+
+        self.chunks = chunks
+
+        self.bm25 = BM25Retriever(self.chunks)
 
         self.rrf = ReciprocalRankFusion(
             k=rrf_k
@@ -59,12 +68,7 @@ class HybridRetriever:
             top_k=retrieval_top_k,
         )
 
-        dense_ranking = [
-            metadata["document_id"]
-            + "_chunk_"
-            + str(metadata["chunk_index"])
-            for metadata in dense_results["metadatas"][0]
-        ]
+        dense_ranking = dense_results["ids"][0]
 
         # -------------------------
         # RRF fusion
@@ -88,6 +92,7 @@ class HybridRetriever:
         candidate_chunks = [
             chunk_lookup[chunk_id]
             for chunk_id, score in fused_results
+            if chunk_id in chunk_lookup
         ]
 
         # -------------------------
