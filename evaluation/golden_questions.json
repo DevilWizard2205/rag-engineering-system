@@ -1,0 +1,403 @@
+[
+  {
+    "id": "q001",
+    "question": "What is dense retrieval?",
+    "category": "straightforward",
+    "expected_answer": "Dense retrieval represents documents and queries as numerical embedding vectors and uses similarity between those vectors to identify relevant chunks.",
+    "expected_sources": ["retrieval_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q002",
+    "question": "What is BM25?",
+    "category": "straightforward",
+    "expected_answer": "BM25 is a sparse retrieval algorithm that scores documents based on the occurrence and importance of query terms.",
+    "expected_sources": ["retrieval_chunk_1"],
+    "should_abstain": false
+  },
+  {
+    "id": "q003",
+    "question": "What is chunking?",
+    "category": "straightforward",
+    "expected_answer": "Chunking is the process of dividing a document into smaller pieces before indexing it for retrieval.",
+    "expected_sources": ["chunking_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q004",
+    "question": "What is chunk overlap?",
+    "category": "straightforward",
+    "expected_answer": "Chunk overlap is the amount of text shared between consecutive chunks.",
+    "expected_sources": ["chunking_chunk_3"],
+    "should_abstain": false
+  },
+  {
+    "id": "q005",
+    "question": "What are embeddings?",
+    "category": "straightforward",
+    "expected_answer": "Embeddings are numerical representations of text that place semantically related pieces of text closer together in a vector space.",
+    "expected_sources": ["embeddings_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q006",
+    "question": "What is citation validation?",
+    "category": "straightforward",
+    "expected_answer": "Citation validation checks whether citations produced by the language model refer to valid context sources.",
+    "expected_sources": ["generation_chunk_2"],
+    "should_abstain": false
+  },
+  {
+    "id": "q007",
+    "question": "What is reranking?",
+    "category": "straightforward",
+    "expected_answer": "Reranking is a retrieval stage that reorders an initial set of candidate chunks according to their relevance to the user query.",
+    "expected_sources": ["reranking_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q008",
+    "question": "What does Hit@K measure?",
+    "category": "straightforward",
+    "expected_answer": "Hit@K measures whether the expected relevant chunk appears within the top K retrieved results.",
+    "expected_sources": ["evaluation_chunk_3"],
+    "should_abstain": false
+  },
+  {
+    "id": "q009",
+    "question": "What is observability in a RAG system?",
+    "category": "straightforward",
+    "expected_answer": "Observability helps developers understand what a RAG system is doing internally and diagnose problems when retrieval or generation produces unexpected results.",
+    "expected_sources": ["observability_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q010",
+    "question": "What is idempotent indexing?",
+    "category": "straightforward",
+    "expected_answer": "Idempotent indexing avoids creating duplicate entries when the same document is processed repeatedly.",
+    "expected_sources": ["indexing_chunk_2"],
+    "should_abstain": false
+  },
+  {
+    "id": "q011",
+    "question": "What is hybrid retrieval?",
+    "category": "straightforward",
+    "expected_answer": "Hybrid retrieval combines multiple retrieval methods such as dense retrieval and BM25 so that semantic similarity and lexical matching both contribute to candidate selection.",
+    "expected_sources": ["retrieval_chunk_2"],
+    "should_abstain": false
+  },
+  {
+    "id": "q012",
+    "question": "What is recursive chunking?",
+    "category": "straightforward",
+    "expected_answer": "Recursive chunking attempts to divide text using a hierarchy of separators, starting with larger semantic boundaries and moving to smaller separators when necessary.",
+    "expected_sources": ["chunking_chunk_1"],
+    "should_abstain": false
+  },
+  {
+    "id": "q013",
+    "question": "What is a query embedding?",
+    "category": "straightforward",
+    "expected_answer": "A query embedding is a numerical representation of a user query generated using the same embedding model used for document chunks.",
+    "expected_sources": ["embeddings_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q014",
+    "question": "What is grounded generation?",
+    "category": "straightforward",
+    "expected_answer": "Grounded generation instructs the language model to answer using the retrieved context rather than relying on unsupported outside information.",
+    "expected_sources": ["generation_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q015",
+    "question": "What is faithfulness in RAG evaluation?",
+    "category": "straightforward",
+    "expected_answer": "Faithfulness measures whether the generated answer is supported by the retrieved context.",
+    "expected_sources": ["evaluation_chunk_3"],
+    "should_abstain": false
+  },
+
+  {
+    "id": "q016",
+    "question": "Why can a RAG system benefit from combining dense retrieval with BM25, and what happens to the candidates afterward?",
+    "category": "multi-hop",
+    "expected_answer": "Dense retrieval captures semantic similarity while BM25 captures lexical matches such as exact terms and identifiers. A hybrid system can combine their results, after which Reciprocal Rank Fusion can combine the rankings from the different retrieval systems.",
+    "expected_sources": ["retrieval_chunk_1", "retrieval_chunk_2"],
+    "should_abstain": false
+  },
+  {
+    "id": "q017",
+    "question": "Why is chunk overlap useful, and what trade-off does excessive overlap create for a retrieval system?",
+    "category": "multi-hop",
+    "expected_answer": "Chunk overlap helps preserve information that crosses chunk boundaries by sharing text between consecutive chunks. However, excessive overlap increases the number of chunks and therefore increases storage and retrieval costs.",
+    "expected_sources": ["chunking_chunk_3"],
+    "should_abstain": false
+  },
+  {
+    "id": "q018",
+    "question": "How are embeddings used during both indexing and retrieval?",
+    "category": "multi-hop",
+    "expected_answer": "During indexing, document chunks are converted into embedding vectors and stored in a vector database. During retrieval, the user query is converted into an embedding using the same model and compared with stored document vectors to find similar chunks.",
+    "expected_sources": ["embeddings_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q019",
+    "question": "How does grounded generation work together with citation validation?",
+    "category": "multi-hop",
+    "expected_answer": "Grounded generation instructs the language model to answer using retrieved context rather than unsupported outside information. Citation validation then checks whether the citations generated in the answer refer to valid context sources.",
+    "expected_sources": ["generation_chunk_0", "generation_chunk_1"],
+    "should_abstain": false
+  },
+  {
+    "id": "q020",
+    "question": "Why can a RAG system abstain, and how does this relate to evaluation?",
+    "category": "multi-hop",
+    "expected_answer": "A RAG system can abstain when the available evidence is insufficient to answer reliably. Evaluation includes unanswerable questions to test whether the system recognizes that the knowledge base does not contain enough information instead of inventing an answer.",
+    "expected_sources": ["generation_chunk_3", "evaluation_chunk_1"],
+    "should_abstain": false
+  },
+  {
+    "id": "q021",
+    "question": "How can retrieval quality and answer faithfulness be evaluated separately?",
+    "category": "multi-hop",
+    "expected_answer": "Retrieval quality can be evaluated using metrics such as Hit@K, which checks whether expected relevant evidence appears in the retrieved results. Faithfulness evaluates whether the generated answer is actually supported by the retrieved context.",
+    "expected_sources": ["evaluation_chunk_3"],
+    "should_abstain": false
+  },
+  {
+    "id": "q022",
+    "question": "How can changing the embedding model affect a RAG system even when its documents stay the same?",
+    "category": "multi-hop",
+    "expected_answer": "The embedding model determines how text is represented in the vector space. Changing the model can therefore change the embedding representations and consequently change dense retrieval results even when the underlying documents remain unchanged.",
+    "expected_sources": ["embeddings_chunk_2"],
+    "should_abstain": false
+  },
+  {
+    "id": "q023",
+    "question": "Why might a retrieval system use reranking after retrieving candidates, and how does this relate to retrieval top-K?",
+    "category": "multi-hop",
+    "expected_answer": "Retrieval top-K controls how many candidates are retrieved before later processing stages. Reranking can then reorder the initial candidate set according to relevance, allowing the system to select the most relevant results from the retrieved candidates.",
+    "expected_sources": ["retrieval_chunk_3", "reranking_chunk_0"],
+    "should_abstain": false
+  },
+  {
+    "id": "q024",
+    "question": "Why is citation coverage useful even when citation validation succeeds?",
+    "category": "multi-hop",
+    "expected_answer": "Citation validation checks whether citations refer to valid context sources, while citation coverage measures how much of the available context is referenced by the generated answer. Therefore, an answer can contain valid citations while still failing to reference enough of the retrieved evidence.",
+    "expected_sources": ["generation_chunk_2", "generation_chunk_3"],
+    "should_abstain": false
+  },
+  {
+    "id": "q025",
+    "question": "How can an evaluation pipeline help compare different RAG configurations?",
+    "category": "multi-hop",
+    "expected_answer": "An evaluation pipeline can run golden questions through the complete RAG system and record retrieval results, generated answers, citations, confidence scores, and evaluation metrics. These results can then be compared across different chunking and retrieval configurations.",
+    "expected_sources": ["evaluation_chunk_4", "observability_chunk_5"],
+    "should_abstain": false
+  },
+  {
+    "id": "q026",
+    "question": "Which embedding model should the system use to achieve the highest possible retrieval accuracy?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q027",
+    "question": "What is the exact latency of the RAG system in milliseconds?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q028",
+    "question": "How many documents can the vector database store before retrieval becomes unreliable?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q029",
+    "question": "What is the monthly cost of running this RAG system in production?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q030",
+    "question": "Which programming language provides the best performance for implementing BM25?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q031",
+    "question": "What percentage of users prefer dense retrieval over BM25?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q032",
+    "question": "What is the maximum number of concurrent users supported by the system?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q033",
+    "question": "Which GPU was used to train the embedding model described in the knowledge base?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q034",
+    "question": "What is the exact accuracy percentage of the RAG system on a real-world production dataset?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q035",
+    "question": "Which cloud provider hosts the production deployment of this RAG system?",
+    "category": "unanswerable",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q036",
+    "question": "How large should chunks be?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q037",
+    "question": "Which retrieval method should be used?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q038",
+    "question": "How many results should retrieval return?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q039",
+    "question": "What model should be used?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q040",
+    "question": "How should the documents be split?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q041",
+    "question": "What should happen when retrieval fails?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q042",
+    "question": "How should answers be evaluated?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q043",
+    "question": "Which score should be used to select the best result?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q044",
+    "question": "How much context should be provided to the model?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q045",
+    "question": "What is the right way to improve retrieval?",
+    "category": "ambiguous",
+    "expected_answer": null,
+    "expected_sources": [],
+    "should_abstain": true
+  },
+  {
+    "id": "q046",
+    "question": "A RAG system retrieves candidates using both semantic similarity and exact lexical matching. Why might this combination be more robust than either method alone?",
+    "category": "challenging",
+    "expected_answer": "Dense retrieval captures semantic similarity while BM25 captures lexical information such as exact terms, names, identifiers, and technical keywords. Combining them can improve robustness because the methods capture different types of relevance.",
+    "expected_sources": ["retrieval_chunk_1", "retrieval_chunk_2"],
+    "should_abstain": false
+  },
+  {
+    "id": "q047",
+    "question": "A document is split into chunks using recursive chunking. What problem is this strategy trying to balance?",
+    "category": "challenging",
+    "expected_answer": "Recursive chunking attempts to preserve larger semantic structures such as paragraphs and sections while still respecting a maximum chunk size.",
+    "expected_sources": ["chunking_chunk_1"],
+    "should_abstain": false
+  },
+  {
+    "id": "q048",
+    "question": "Why does a RAG system normally embed documents during indexing instead of recomputing their embeddings for every user query?",
+    "category": "challenging",
+    "expected_answer": "Document embeddings can be generated once during indexing and stored in a vector database. During retrieval, only the query needs to be embedded again, avoiding repeated computation of document embeddings for every query.",
+    "expected_sources": ["embeddings_chunk_3"],
+    "should_abstain": false
+  },
+  {
+    "id": "q049",
+    "question": "An answer contains citations such as [1] and [2], but neither citation actually supports the claims being made. Which evaluation property is most directly affected?",
+    "category": "challenging",
+    "expected_answer": "Citation accuracy is most directly affected because it measures whether citations in the generated answer correctly refer to the evidence supporting the associated claims.",
+    "expected_sources": ["evaluation_chunk_4"],
+    "should_abstain": false
+  },
+  {
+    "id": "q050",
+    "question": "Why can a RAG system produce an answer that is relevant to a question but still fail the faithfulness criterion?",
+    "category": "challenging",
+    "expected_answer": "An answer can be relevant to the question while containing claims that are not supported by the retrieved context. Faithfulness specifically measures whether the generated answer is supported by that context.",
+    "expected_sources": ["evaluation_chunk_3"],
+    "should_abstain": false
+  }
+]

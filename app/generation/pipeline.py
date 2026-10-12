@@ -15,7 +15,7 @@ class RAGPipeline:
         llm,
         retrieval_top_k: int = 10,
         final_top_k: int = 5,
-        confidence_threshold: float = 0.5,
+        confidence_theshold: float = 0.5, 
     ):
         self.retriever = retriever
         self.llm = llm
@@ -142,7 +142,7 @@ class RAGPipeline:
 
         return {
             "query": query,
-            "answer": answer,
+            "answe r": answer,
             "results": results,
             "context": context,
             "prompt": prompt,

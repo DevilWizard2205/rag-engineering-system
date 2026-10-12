@@ -6,3 +6,5 @@ __pycache__/
 .vscode/
 data/raw/*.pdf
 data/chroma/
+# Generated evaluation artifacts
+evaluation/results/
